@@ -35,13 +35,13 @@ export const fetchUserContributions = async (
   const query = `
         query($username:String!){
             user(login:$username){
-                contributionCollection{
+                contributionsCollection{
                     contributionCalendar{
                         totalContributions
                         weeks {
                             contributionDays{
                                 contributionCount
-                                data
+                                date
                                 color
                             }
                         }
@@ -71,9 +71,11 @@ export const fetchUserContributions = async (
       username,
     });
 
-    return response.user.contributionCollection.contributionCalendar;
+    console.log("Response in github.ts", response);
+
+    return response.user.contributionsCollection.contributionCalendar;
   } catch (error) {
     console.log("Error in fetchUserContributions", error);
-    return error;
+    return null;
   }
 };
